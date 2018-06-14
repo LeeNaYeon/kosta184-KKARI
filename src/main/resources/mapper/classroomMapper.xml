@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper     
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="classroomMapper">
+	
+	<insert id="insertAsgn" parameterType="crAsgnDTO">
+		insert into cr_asgn values('cr_asgn'||lpad(cr_asgn_seq.nextval,4,'0'), #{courseCode}, #{userId}, #{crAsgnTitle}, #{crAsgnDeadline}, #{crAsgnDate}, #{crAsgnContent}, #{crAsgnReadnum})
+	</insert>
+</mapper> 
+ 

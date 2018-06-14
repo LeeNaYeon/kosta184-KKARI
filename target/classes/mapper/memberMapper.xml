@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper     
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+
+<insert id="insertMentee" parameterType="menteeDTO">
+      insert into mentee
+      values(#{userId},#{userPwd},#{userName},#{userPhone},#{userEmail},#{userPhoto})
+   </insert>
+
+   <insert id="insertApplicant" parameterType="applicantDTO">
+      insert into applicant
+      values(#{userId},#{applicantResume},#{applicantMajor},#{applicantMajor2},#{applicantMajor3},#{applicantStatus})
+   </insert>
+   
+   <insert id="inserInterested" parameterType="interestedDTO">
+      insert into interested 
+      values('inter'||lpad(inter_seq.nextval,4,'0'), #{userId}, #{interField}, #{interField2}, #{interField3})
+   </insert>
+
+	 <select id="idcheck" resultType="int">
+		select count(*) from mentee where user_Id=#{value}
+	</select>
+   
+</mapper> 

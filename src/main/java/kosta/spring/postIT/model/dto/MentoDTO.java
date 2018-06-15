@@ -1,5 +1,7 @@
 package kosta.spring.postIT.model.dto;
 
+import java.util.List;
+
 public class MentoDTO {
 
 	private String userId;
@@ -8,7 +10,7 @@ public class MentoDTO {
 	private String mentoMajor;
 	private String mentoMajor2;
 	private String mentoMajor3;
-	
+
 	public MentoDTO() {}
 	
 	public MentoDTO(String userId, String mentoResume, String mentoDesc, String mentoMajor, String mentoMajor2,
@@ -58,11 +60,5 @@ public class MentoDTO {
 	public void setMentoMajor3(String mentoMajor3) {
 		this.mentoMajor3 = mentoMajor3;
 	}
-	
-	
-	
-	
-	
-	
 	
 }

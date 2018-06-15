@@ -5,6 +5,7 @@ import java.util.List;
 import kosta.spring.postIT.model.dto.CrAsgnDTO;
 import kosta.spring.postIT.model.dto.CrFeedbackDTO;
 import kosta.spring.postIT.model.dto.CrSubAsgnDTO;
+import kosta.spring.postIT.model.dto.MenteeDTO;
 
 public interface ClassroomDAO {
 	
@@ -14,15 +15,19 @@ public interface ClassroomDAO {
 	
 	int deleteAsgn(String crAsgnCode);
 	
-	List<CrAsgnDTO> selectAsgnList(String courseCode);
+	int asgnReadnumUpdate(String crAsgnCode);
+
+	MenteeDTO selectAsgnList(String courseCode);
 	
-	CrAsgnDTO selectAsgn(String crAsgnCode);
+	MenteeDTO selectAsgn(String courseCode);
+	
+	CrAsgnDTO selectAsgnNoJoin(String crAsgnCode);
 	
 	int insertSubAsgn(CrSubAsgnDTO crSubAsgnDTO);
 	
 	int updateSubAsgn(CrSubAsgnDTO crSubAsgnDTO);
 	
-	int deleteSubAsgn(CrSubAsgnDTO crSubAsgnDTO);
+	int deleteSubAsgn(String crSubasgnCode);
 	
 	List<CrSubAsgnDTO> selectSubAngnList(String crAsgnCode);
 	

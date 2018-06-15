@@ -32,11 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="cr_feed_content" property="crFeedContent" />
 		<result column="cr_feed_date" property="crFeedDate" />
 	</resultMap>
-	
-	<!-- 
-		멘토 과제등록 resultMap
-		(멘티에 멘토 이름이 있으므로 멘티와 매핑시켰음)
-	-->
+
+	<!-- 멘토 과제등록 resultMap (멘티에 멘토 이름이 있으므로 멘티와 매핑시켰음) -->
 	<resultMap type="menteeDTO" id="menteeAsgnDTOMap">
 		<id column="user_id" property="userId" />
 		<result column="user_pwd" property="userPwd" />
@@ -73,8 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{userId}, #{crAsgnTitle}, #{crAsgnDeadline}, sysdate,
 		#{crAsgnContent}, #{crAsgnReadnum})
 	</insert>
-	
-	<!-- 과제 수정 (멘토)-->
+
+	<!-- 과제 수정 (멘토) -->
 	<update id="updateAsgn" parameterType="crAsgnDTO">
 		update cr_asgn
 		set
@@ -87,7 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 과제 삭제 (멘토) -->
 	<delete id="deleteAsgn" parameterType="String">
 		delete from cr_asgn
-		where cr_asgn_code=#{_paramter}
+		where
+		cr_asgn_code=#{_paramter}
 	</delete>
 
 	<!-- 멘토가 등록한 과제물 리스트 출력 -->
@@ -95,25 +93,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *
 		from cr_asgn c join mentee m
 		on c.user_id = m.user_id
-		where course_code=#{_parameter}
+		where
+		course_code=#{_parameter}
 		order by cr_asgn_code desc
 	</select>
-	
+
 	<!-- 멘토가 등록한 과제물 출력 -->
 	<select id="selectAsgn" parameterType="String" resultMap="menteeAsgnDTOMap">
-		select *
+		select
+		*
 		from cr_asgn c join mentee m
 		on c.user_id = m.user_id
-		where course_code=#{_parameter}
+		where
+		course_code=#{_parameter}
 	</select>
-	
+
 	<!-- 멘토가 등록한 과제물 출력 -->
 	<select id="selectAsgnNoJoin" parameterType="String" resultMap="asgnSelectMap">
 		select *
 		from cr_asgn
 		where cr_asgn_code=#{_parameter}
 	</select>
-	
+
 	<!-- 조회수 증가 -->
 	<update id="asgnReadnumUpdate" parameterType="String">
 		update cr_asgn
@@ -122,50 +123,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cr_asgn_code= #{_parameter}
 	</update>
 
-	
+
 	<!-- 클래스룸 과제제출 등록하기 -->
 	<insert id="insertSubAsgn" parameterType="crSubAsgnDTO">
 		insert into cr_sub_asgn
-		values('cr_sub_asgn'||lpad(cr_subasgn_seq.nextval,4,'0'),
-		#{crAsgnCode}, #{userId}, #{crSubasgnTitle}, #{crSubasgnContent},
+		values(#{crAsgnCode}, #{userId}, #{crSubasgnTitle},
+		#{crSubasgnContent},
 		sysdate, #{crSubasgnFile})
 	</insert>
-	
-	
+
+
 	<!-- 클래스룸 과제제출 수정하기 -->
 	<update id="updateSubAsgn" parameterType="crSubAsgnDTO">
 		update cr_sub_asgn
 		set
 		cr_subasgn_title=#{crSubasgnTitle},
-		cr_subasgn_content=#{crSubasgnFile}, cr_subasgn_date=#{crSubasgnDate}
-		where cr_subasgn_code=#{crSubasgnCode}
+		cr_subasgn_content=#{crSubasgnContent},
+		cr_subasgn_file=#{crSubasgnFile},
+		cr_subasgn_date=sysdate
+		where
+		cr_asgn_code =#{crAsgnCode} and user_id=#{userId}
 	</update>
 
 	<!-- 클래스룸 과제제출 삭제하기 -->
-	<delete id="deleteSubAsgn" parameterType="String">
+	<delete id="deleteSubAsgn" parameterType="map">
 		delete from cr_sub_asgn
-		where cr_subasgn_code=#{_parameter}
+		where cr_asgn_code =#{crAsgnCode} and user_id=#{userId}
 	</delete>
-	
-	
+
+
 	<!-- 멘티가 등록한 과제 리스트 출력 -->
 	<select id="selectSubAngnList" parameterType="String" resultMap="subAsgnSelectMap">
-		select
-		<include refid="crSubAsgnColumnName" />
+		select *
 		from cr_sub_asgn
 		where cr_asgn_code = #{_parameter}
-		order by cr_subasgn_code desc
-	</select>
-	
-	<!-- 멘티가 등록한 과제 출력 -->
-	<select id="selectSubAngn" parameterType="String" resultMap="subAsgnSelectMap">
-		select
-		<include refid="crSubAsgnColumnName" />
-		from cr_sub_asgn
-		where cr_subasgn_code =#{_parameter}
 	</select>
 
-	
+	<!-- 멘티가 등록한 과제 출력 -->
+	<select id="selectSubAngn" parameterType="map" resultMap="subAsgnSelectMap">
+		select
+		*
+		from cr_sub_asgn
+		where cr_asgn_code =#{crAsgnCode} and
+		user_id=#{userId}
+	</select>
+
+
 	<!-- 피드백 등록하기 -->
 	<insert id="insertFeedback" parameterType="crFeedbackDTO">
 		insert into
@@ -197,5 +200,69 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from cr_feedback
 		where cr_subasgn_code = #{_parameter}
 	</select>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+   <resultMap type="menteeDTO" id="menteeNoticeDTOMap">
+      <id column="user_id" property="userId" />
+      <result column="user_pwd" property="userPwd" />
+      <result column="user_name" property="userName" />
+      <result column="user_phone" property="userPhone" />
+      <result column="user_email" property="userEmail" />
+      <result column="user_photo" property="userPhoto" />
+      <collection property="notices" ofType="crNoticeDTO">
+         <id column="cr_notice_code" property="crNoticeCode"/>
+         <result column="course_code" property="courseCode"/>
+         <result column="user_id" property="userId"/>
+         <result column="cr_notice_title" property="crNoticeTitle"/>
+         <result column="cr_notice_content" property="crNoticeContent"/>
+         <result column="cr_notcie_date" property="crNoticeDate"/>
+      </collection>
+   </resultMap>
+	
+
+	<!-- 클래스룸 공지 등록 -->
+	<insert id="insertNotice" parameterType="crNoticeDTO">
+		insert into cr_notice
+		values('cr_notice'||lpad(cr_notice_seq.nextval,4,'0'), #{courseCode},
+		#{userId}, #{crNoticeTitle}, #{crNoticeContent}, sysdate)
+	</insert>
+	
+	<delete id="deleteNotice" parameterType="String">
+      delete from cr_notice
+      where cr_notice_code=#{_paramter}
+    </delete>
+	
+	<!-- 클래스룸 공지 리스트 출력 -->
+	<select id="selectNoticeList" parameterType="String" resultMap="menteeNoticeDTOMap">
+      select *
+      from cr_notice n join mentee m
+      on n.user_id = m.user_id
+      where course_code=#{_parameter}
+      order by cr_notice_code desc
+    </select>
+    
 </mapper> 
  

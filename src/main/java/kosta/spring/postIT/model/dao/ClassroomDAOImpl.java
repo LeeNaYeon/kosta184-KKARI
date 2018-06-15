@@ -1,6 +1,8 @@
 package kosta.spring.postIT.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kosta.spring.postIT.model.dto.CrAsgnDTO;
 import kosta.spring.postIT.model.dto.CrFeedbackDTO;
+import kosta.spring.postIT.model.dto.CrNoticeDTO;
 import kosta.spring.postIT.model.dto.CrSubAsgnDTO;
 import kosta.spring.postIT.model.dto.MenteeDTO;
 
@@ -49,12 +52,12 @@ public class ClassroomDAOImpl implements ClassroomDAO {
 	public MenteeDTO selectAsgn(String courseCode) {
 		return session.selectOne("classroomMapper.selectAsgn", courseCode);
 	}
-	
+
 	@Override
 	public CrAsgnDTO selectAsgnNoJoin(String crAsgnCode) {
 		return session.selectOne("classroomMapper.selectAsgnNoJoin", crAsgnCode);
 	}
-	
+
 	@Override
 	public int insertSubAsgn(CrSubAsgnDTO crSubAsgnDTO) {
 		return session.insert("classroomMapper.insertSubAsgn", crSubAsgnDTO);
@@ -62,12 +65,21 @@ public class ClassroomDAOImpl implements ClassroomDAO {
 
 	@Override
 	public int updateSubAsgn(CrSubAsgnDTO crSubAsgnDTO) {
+		System.out.println("---" + crSubAsgnDTO.getCrAsgnCode());
+		System.out.println("---" + crSubAsgnDTO.getUserId());
+		System.out.println("---" + crSubAsgnDTO.getCrSubasgnTitle());
+		System.out.println("---" + crSubAsgnDTO.getCrSubasgnContent());
+		System.out.println("---" + crSubAsgnDTO.getCrSubasgnFile());
+
 		return session.update("classroomMapper.updateSubAsgn", crSubAsgnDTO);
 	}
 
 	@Override
-	public int deleteSubAsgn(String crSubasgnCode) {
-		return session.delete("classroomMapper.deleteSubAsgn", crSubasgnCode);
+	public int deleteSubAsgn(String crAsgnCode, String userId) {
+		Map<String, String> map = new HashMap<>();
+		map.put("crAsgnCode", crAsgnCode);
+		map.put("userId", userId);
+		return session.delete("classroomMapper.deleteSubAsgn", map);
 	}
 
 	@Override
@@ -76,8 +88,11 @@ public class ClassroomDAOImpl implements ClassroomDAO {
 	}
 
 	@Override
-	public CrSubAsgnDTO selectSubAsgn(String crSubasgnCode) {
-		return session.selectOne("classroomMapper.selectSubAngn", crSubasgnCode);
+	public CrSubAsgnDTO selectSubAsgn(String crAsgnCode, String userId) {
+		Map<String, String> map = new HashMap<>();
+		map.put("crAsgnCode", crAsgnCode);
+		map.put("userId", userId);
+		return session.selectOne("classroomMapper.selectSubAngn", map);
 	}
 
 	@Override
@@ -102,6 +117,22 @@ public class ClassroomDAOImpl implements ClassroomDAO {
 	public CrFeedbackDTO selectFeedback(String crSubasgnCode) {
 		return session.selectOne("classroomMapper.selectFeedback", crSubasgnCode);
 
+	}
+
+	@Override
+	public int insertNotice(CrNoticeDTO crNoticeDTO) {
+		return session.insert("classroomMapper.insertNotice", crNoticeDTO);
+	}
+
+	@Override
+	public MenteeDTO selectNoticeList(String courseCode) {
+		MenteeDTO menteeDTO = session.selectOne("classroomMapper.selectNoticeList", courseCode);
+		return menteeDTO;
+	}
+
+	@Override
+	public int deleteNotice(String crNoticeCode) {
+		return session.delete("classroomMapper.deleteNotice", crNoticeCode);
 	}
 
 }

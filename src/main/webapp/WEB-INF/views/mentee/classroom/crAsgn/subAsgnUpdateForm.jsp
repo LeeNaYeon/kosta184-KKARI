@@ -2,20 +2,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
+<script>
+	function checkValid() {
+	    var f = window.document.subAsgnWriteForm;
+			
+		if ( f.crSubasgnTitle.value == "") {
+		    alert( "제출과제 제목을 입력해 주세요." );
+		    f.crSubasgnTitle.focus();
+			return false;
+	    }
+		if ( f.crSubasgnContent.value == "" ) {
+			alert( "제출과제 내용을 입력해 주세요." );
+			f.crSubasgnContent.focus();
+			return false;
+		}
+		if ( f.crSubasgnFile.value == "" ) {
+			alert( "제출과제 내용을 입력해 주세요." );
+			f.crSubasgnContent.focus();
+			return false;
+		}
+	    return true;
+	}
+</script>
+
                     <div class="col-md-8">
-                        <div class="title inner-page-title">
-	                        <h3>5월 17일 AOP 과제입니다.</h3>
-	                    </div>
-	                    <form>
+                      
+	                    <form name="subAsgnWriteForm" action="${pageContext.request.contextPath}/cr/subAsgn/update" method="post" enctype="multipart/form-data" onsubmit="return checkValid()">
 	                        <div class="row">
 	                            <div class="col-sm-12 ">
+	                                <input type="hidden" name="crAsgnCode" value="${requestScope.crSubAsgnDTO.crAsgnCode}"/>
+	                            	<input type="hidden" name= "userId" value="astro"/>
 	                                <div class="form-group">
 	                                    <label>과제제목 :</label>
-	                                    <input type="text" name="title" class="form-control" placeholder="title">
+	                                    <input type="text" name="crSubasgnTitle" class="form-control" placeholder="title" 
+	                                    value="${requestScope.crSubAsgnDTO.crSubasgnTitle}">
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>과제내용 :</label>
-	                                    <textarea rows="6" name="content" class="form-control" placeholder="content"></textarea>
+	                                    <textarea rows="6" name="crSubasgnContent" class="form-control" placeholder="content" style="height: 400px;">${requestScope.crSubAsgnDTO.crSubasgnContent}</textarea>
 	                                </div>
 	                                <div class="form-group">
 	                                    <label class="btn btn-primary">
@@ -30,7 +55,8 @@
 	                            </div>
 	                            <div class="col-md-12">
 	                                <div class="form-group" style="text-align: right;">
-	                                    <a class="btn btn-primary" href="#">과제제출</a>
+	                                    <input type="submit" class="btn btn-primary" value="과제수정">
+	                                	<input type="reset" class="btn btn-primary" value="다시쓰기">
 	                                </div>
 	                            </div>
 	                        </div>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kosta.spring.postIT.model.dao.ClassroomDAO;
 import kosta.spring.postIT.model.dto.CrAsgnDTO;
 import kosta.spring.postIT.model.dto.CrFeedbackDTO;
+import kosta.spring.postIT.model.dto.CrNoticeDTO;
 import kosta.spring.postIT.model.dto.CrSubAsgnDTO;
 import kosta.spring.postIT.model.dto.MenteeDTO;
 
@@ -64,8 +65,8 @@ public class ClassroomServiceImpl implements ClassroomService {
 	}
 
 	@Override
-	public int deleteSubAsgn(String crSubasgnCode) {
-		return classroomDAO.deleteSubAsgn(crSubasgnCode);
+	public int deleteSubAsgn(String crAsgnCode, String userId) {
+		return classroomDAO.deleteSubAsgn(crAsgnCode,userId);
 	}
 
 	@Override
@@ -74,8 +75,8 @@ public class ClassroomServiceImpl implements ClassroomService {
 	}
 
 	@Override
-	public CrSubAsgnDTO selectSubAsgn(String crSubasgnCode) {
-		return classroomDAO.selectSubAsgn(crSubasgnCode);
+	public CrSubAsgnDTO selectSubAsgn(String crAsgnCode, String userId) {
+		return classroomDAO.selectSubAsgn(crAsgnCode,userId);
 	}
 	
 	@Override
@@ -96,6 +97,21 @@ public class ClassroomServiceImpl implements ClassroomService {
 	@Override
 	public CrFeedbackDTO selectFeedback(String crSubasgnCode) {
 		return classroomDAO.selectFeedback(crSubasgnCode);
+	}
+
+	@Override
+	public int insertNotice(CrNoticeDTO crNoticeDTO) {
+		return classroomDAO.insertNotice(crNoticeDTO);
+	}
+
+	@Override
+	public MenteeDTO selectNoticeList(String courseCode) {
+		return classroomDAO.selectNoticeList(courseCode);
+	}
+
+	@Override
+	public int deleteNotice(String crNoticeCode) {
+		return classroomDAO.deleteNotice(crNoticeCode);
 	}
 
 }

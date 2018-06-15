@@ -31,7 +31,7 @@
 	                            <div class="col-sm-12 ">
 	                            	<!-- course code가 마이페이지에서 이페이지로 넘어올때 넘겨줘야하는데 그게 없으니 일단 이렇게 함 -->
 	                               	<input type="hidden" name="userId" value="bogummy"/>
-	                            	<input type="hidden" name="courseCode" value="a1"/>
+	                               	<input type="hidden" name="courseCode" value="${sessionScope.courseCode}"/>
 	                                <div class="form-group">
 	                                    <label>과제제목 :</label>
 	                                    <input type="text" name="crAsgnTitle" class="form-control" placeholder="title">
@@ -52,8 +52,6 @@
 	                                <div class="form-group" style="text-align: right;">
 	                                	<input type="submit" class="btn btn-primary" value="과제등록">
 	                                	<input type="reset" class="btn btn-primary" value="다시쓰기">
-	                                	
-										<!--  <a class="btn btn-primary" href="#">과제등록</a> -->	                                
 									</div>
 	                            </div>
 	                        </div>

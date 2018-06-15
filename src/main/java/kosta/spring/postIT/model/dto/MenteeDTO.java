@@ -12,7 +12,8 @@ public class MenteeDTO {
 		private String userPhoto;
 		
 		private List<CrAsgnDTO> asgns;
-
+		private List<CrNoticeDTO> notices;
+		
 		public MenteeDTO() {} 
 		
 		public MenteeDTO(String userId, String userPwd, String userName, String userPhone, String userEmail,
@@ -68,6 +69,14 @@ public class MenteeDTO {
 
 		public void setAsgns(List<CrAsgnDTO> asgns) {
 			this.asgns = asgns;
+		}
+
+		public List<CrNoticeDTO> getNotices() {
+			return notices;
+		}
+
+		public void setNotices(List<CrNoticeDTO> notices) {
+			this.notices = notices;
 		}
 		
 }

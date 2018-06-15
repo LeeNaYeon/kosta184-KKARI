@@ -46,11 +46,11 @@
                                 </div>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/cr/notice/noticeSelectList">공지</a>
+                                        <a href="${pageContext.request.contextPath}/cr/notice/selectList/"+${sessionScope.courseCode}>공지</a>
                                     </li>
                                     <li>
                                     	<!-- 일단 임의로 코스코드 a1줬음 -->
-                                        <a href="${pageContext.request.contextPath}/cr/asgn/selectList/a1">과제</a>
+                                        <a href="${pageContext.request.contextPath}/cr/asgn/selectList">과제</a>
                                     </li>
                                 </ul>
                             </div>

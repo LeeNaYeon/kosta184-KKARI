@@ -7,125 +7,83 @@
                     <div style="margin-bottom: 15px; text-align: right;">
                     	<a class="btn btn-primary" href="${pageContext.request.contextPath}/cr/mentoNotice/noticeInsertForm">공지사항 등록</a>
                     </div>
-                        <div class="blog-div">
-                            <div class="blog-desc">
-                            	<b>장희정</b><br>
-                                <date>5월 17일</date>
-                                <hr style="margin-top: 5px; margin-bottom: 5px;">
-                                                                
-                                <h3><a href="#" title="Details">6월 18일 교육장소 변경 </a></h3>
-                                <p>기존 코스타 세미나실에서 민준이형네 집으로 장소가 변경되었습니다! 확인해주십쇼!!</p>
-                                
-                                <section class="comment-form">
-		                            <form>
-		                                <div class="row">
-		                                    <div class="col-md-12">
-					                            <!-- First Comment -->
-					                            <div class="title inner-page-title">
-					                                <h6>수업 댓글 n개</h6>
-					                            </div>
-					                            <article class="row">
-					                                <div style="margin-left: 10px;">
-					                                    <figure class="thumbnail">
-					                                        <img class="img-responsive" src="${pageContext.request.contextPath}/resources/images/users/2.jpg" alt="avatar" style="border-radius: 50px; width: 50px; height: 50px;"/>
-					                                    </figure>
-					                                </div>
-					                                <div class="col-md-10 col-sm-10 col-xs-9">
-					                                    <div class="panel panel-default arrow left">
-					                                        <div class="panel-body">
-					                                            <header class="text-left">
-					                                            	<br>
-					                                                <div class="comment-user"><b>이원섭 오후 7:54</b></div>
-					                                            </header>
-					                                            <div class="comment-post">
-					                                                <p>
-					                                                	알겠습니다! 늦지않을게요.알겠습니다! 
-					                                                </p>
-					                                            </div>
+                    
+                    
+                    	<c:choose>
+                    		<c:when test="${empty mento.notices}">
+                    			<div class="blog-div">
+		                            <div class="blog-desc" style="text-align: center;">
+		                            	<h4>등록된 공지사항이 없습니다.</h4>	              
+		                            </div>
+		                        </div>
+                    		</c:when>
+                    		
+                    		
+                    		<c:otherwise>
+                    		
+                    			<c:forEach items="${mento.notices}" var="notice">
+	                    			<div class="blog-div">
+			                            <div class="blog-desc">
+			                            	<b>${mento.userName}</b><br>
+			                                <date>${notice.crNoticeDate}</date>
+			                                <hr style="margin-top: 5px; margin-bottom: 5px;">
+			                                                                
+			                                <h3><a href="#" title="Details">${notice.crNoticeTitle } </a></h3>
+			                                <pre>${notice.crNoticeContent}</pre>
+			                                
+			                                <section class="comment-form">
+					                            <form>
+					                                <div class="row">
+					                                    <div class="col-md-12">
+								                            <!-- First Comment -->
+								                            <div class="title inner-page-title">
+								                                <h6>수업 댓글 n개</h6>
+								                            </div>
+								                            <article class="row">
+								                                <div style="margin-left: 10px;">
+								                                    <figure class="thumbnail">
+								                                        <img class="img-responsive" src="${pageContext.request.contextPath}/resources/images/users/2.jpg" alt="avatar" style="border-radius: 50px; width: 50px; height: 50px;"/>
+								                                    </figure>
+								                                </div>
+								                                <div class="col-md-10 col-sm-10 col-xs-9">
+								                                    <div class="panel panel-default arrow left">
+								                                        <div class="panel-body">
+								                                            <header class="text-left">
+								                                            	<br>
+								                                                <div class="comment-user"><b>이원섭 오후 7:54</b></div>
+								                                            </header>
+								                                            <div class="comment-post">
+								                                                <p>
+								                                                	알겠습니다! 늦지않을게요.알겠습니다! 
+								                                                </p>
+								                                            </div>
+								                                        </div>
+								                                    </div>
+								                                </div>
+								                            </article>
+											                                    	
+					                                        <div class="form-group">
+					                                            <label>댓글 :</label>
+					                                            <textarea rows="6" name="name" class="form-control"></textarea>
+					                                        </div>
+					                                        <div class="form-group" style="text-align: right; margin-bottom: 5px;">
+					                                            <a class="btn btn-primary" href="#">등록</a>
 					                                        </div>
 					                                    </div>
 					                                </div>
-					                            </article>
-								                                    	
-		                                        <div class="form-group">
-		                                            <label>댓글 :</label>
-		                                            <textarea rows="6" name="name" class="form-control"></textarea>
-		                                        </div>
-		                                        <div class="form-group" style="text-align: right; margin-bottom: 5px;">
-		                                            <a class="btn btn-primary" href="#">등록</a>
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                            </form>
-		                        </section>
-                                
-                                <!-- 멘토가 보는 부분 수정 삭제버튼-->
-                                <div style="margin-top: 15px; text-align: center;">
-                                	<a class="btn btn-primary" href="#">수정</a>
-                                	<a class="btn btn-primary" href="#">삭제</a>
-                                </div>                             
-                            </div>
-                        </div>
-                        <div class="blog-div">
-                            <div class="blog-desc">
-                            	<b>장희정</b><br>
-                                <date>5월 17일</date>
-                                <hr style="margin-top: 5px; margin-bottom: 5px;">
-                                                                
-                                <h3><a href="#" title="Details">6월 18일 교육장소 변경 </a></h3>
-                                <p>기존 코스타 세미나실에서 민준이형네 집으로 장소가 변경되었습니다! 확인해주십쇼!!</p>
-                                
-                                <section class="comment-form">
-		                            <form>
-		                                <div class="row">
-		                                    <div class="col-md-12">
-					                            <!-- First Comment -->
-					                            <div class="title inner-page-title">
-					                                <h6>수업 댓글 n개</h6>
-					                            </div>
-					                            <article class="row">
-					                                <div style="margin-left: 10px;">
-					                                    <figure class="thumbnail">
-					                                        <img class="img-responsive" src="${pageContext.request.contextPath}/resources/images/users/2.jpg" alt="avatar" style="border-radius: 50px; width: 50px; height: 50px;"/>
-					                                    </figure>
-					                                </div>
-					                                <div class="col-md-10 col-sm-10 col-xs-9">
-					                                    <div class="panel panel-default arrow left">
-					                                        <div class="panel-body">
-					                                            <header class="text-left">
-					                                            	<br>
-					                                                <div class="comment-user"><b>이원섭 오후 7:54</b></div>
-					                                            </header>
-					                                            <div class="comment-post">
-					                                                <p>
-					                                                	알겠습니다! 늦지않을게요.알겠습니다! 
-					                                                </p>
-					                                            </div>
-					                                        </div>
-					                                    </div>
-					                                </div>
-					                            </article>
-								                                    	
-		                                        <div class="form-group">
-		                                            <label>댓글 :</label>
-		                                            <textarea rows="6" name="name" class="form-control"></textarea>
-		                                        </div>
-		                                        <div class="form-group" style="text-align: right; margin-bottom: 5px;">
-		                                            <a class="btn btn-primary" href="#">등록</a>
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                            </form>
-		                        </section>
-                                
-                                <!-- 멘토가 보는 부분 수정 삭제버튼-->
-                                <div style="margin-top: 15px; text-align: center;">
-                                	<a class="btn btn-primary" href="#">수정</a>
-                                	<a class="btn btn-primary" href="#">삭제</a>
-                                </div>
-                                
-                            </div>
-                        </div>
+					                            </form>
+					                        </section>
+			                                
+			                                <!-- 멘토가 보는 부분 수정 삭제버튼-->
+			                                <div style="margin-top: 15px; text-align: center;">
+			                                	<a class="btn btn-primary" href="#">수정</a>
+			                                	<a class="btn btn-primary" href="${pageContext.request.contextPath}/cr/notice/delete/${notice.crNoticeCode}">삭제</a>
+			                                </div>                             
+			                            </div>
+			                        </div>
+                    			</c:forEach>
+                    		</c:otherwise>
+                    	</c:choose>
                     </div>
                 </div>
             </div>

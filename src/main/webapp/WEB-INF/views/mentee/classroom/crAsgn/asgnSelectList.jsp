@@ -16,7 +16,7 @@
 	                                <date>${asgn.crAsgnDate}</date>
 	                                <hr style="margin-top: 5px; margin-bottom: 5px;">
 	                                <date>${asgn.crAsgnDeadline} 마감</date>
-	                                <h3><a href="${pageContext.request.contextPath}/cr/asgn/select/a1/${asgn.crAsgnCode}" title="Details">${asgn.crAsgnTitle}</a></h3>
+	                                <h3><a href="${pageContext.request.contextPath}/cr/asgn/select/${asgn.crAsgnCode}" title="Details">${asgn.crAsgnTitle}</a></h3>
 	                               	<pre>${asgn.crAsgnContent}</pre>
 	                            </div>
                             </div>

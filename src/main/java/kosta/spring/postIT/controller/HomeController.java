@@ -1,5 +1,7 @@
 package kosta.spring.postIT.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
-
-		return "mentee/classroom/crNotice/noticeSelectList";
+	public String home(HttpSession session) {
+		
+		session.setAttribute("courseCode", "a1");
+		return "redirect:/cr/notice/selectList";
 	}
 	
 	@RequestMapping("/index")

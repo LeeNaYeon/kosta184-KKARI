@@ -4,10 +4,14 @@ import java.util.List;
 
 import kosta.spring.postIT.model.dto.CrAsgnDTO;
 import kosta.spring.postIT.model.dto.CrFeedbackDTO;
+import kosta.spring.postIT.model.dto.CrNoticeDTO;
 import kosta.spring.postIT.model.dto.CrSubAsgnDTO;
 import kosta.spring.postIT.model.dto.MenteeDTO;
 
 public interface ClassroomService {
+	
+	//asgn
+	
 	int insertAsgn(CrAsgnDTO crAsgnDTO);
 
 	int updateAsgn(CrAsgnDTO crAsgnDTO);
@@ -24,11 +28,11 @@ public interface ClassroomService {
 
 	int updateSubAsgn(CrSubAsgnDTO crSubAsgnDTO);
 
-	int deleteSubAsgn(String crSubasgnCode);
+	int deleteSubAsgn(String crAsgnCode, String userId);
 
 	List<CrSubAsgnDTO> selectSubAngnList(String crAsgnCode);
 
-	CrSubAsgnDTO selectSubAsgn(String crSubasgnCode);
+	CrSubAsgnDTO selectSubAsgn(String crAsgnCode, String userId);
 
 	int insertFeedback(CrFeedbackDTO crFeedbackDTO);
 
@@ -37,4 +41,12 @@ public interface ClassroomService {
 	int deleteFeedback(String crFeedCode);
 
 	CrFeedbackDTO selectFeedback(String crSubasgnCode);
+	
+	
+	//notice
+	int insertNotice(CrNoticeDTO crNoticeDTO);
+	
+	MenteeDTO selectNoticeList(String courseCode);
+	
+	int deleteNotice(String crNoticeCode);
 }

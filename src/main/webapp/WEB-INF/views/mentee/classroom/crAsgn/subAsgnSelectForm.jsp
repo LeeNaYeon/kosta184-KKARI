@@ -4,32 +4,40 @@
 
                     <div class="col-md-8">
                         <div class="title inner-page-title">
-	                        <h3>ex05_springWebMVC02</h3>
+	                        <h3>${requestScope.crSubAsgnDTO.userId}님 과제</h3>
 	                        <div style="text-align: right;">
-	                        	<date>2018.06.20</date>
-	                        	<b>이원섭 멘티</b>
+	                        	<date>${requestScope.crSubAsgnDTO.crSubasgnDate}</date><br>
 	                        </div>
 	                    </div>
 	                    <form>
 	                        <div class="row">
-	                            <div class="col-sm-12 ">
-	                            	<h4>과제내용</h4>
-	                            	<b>
-	                            		과재내용부분입니다.
-	                            	</b>
-	                            	<br><br>
-	                            	<h4>다운로드</h4>
-	                            	<b>ex05_springWebMVC02</b>
-	                            	
-	            
-	                            </div>
-	                            <div class="col-md-12">
-	                                <div class="form-group" style="text-align: right;">
-	                                	<!-- 멘티일때 보이는 버튼 -->
-	                                    <a class="btn btn-primary" href="#">과제수정</a>
-	                                    <a class="btn btn-primary" href="#">과제삭제</a><br><br>
+	                         <div class="col-sm-12 ">
+	                            	<input type="hidden" name="crAsgnCode" value="${requestScope.crAsgnCode}"/>
+	                            	<input type="hidden" name= "userId" value="astro"/>
+	                                <div class="form-group">
+	                                    <label>과제제목 :</label>
+	                                    <input type="text" name="crSubasgnTitle" class="form-control" placeholder="title" 
+	                                    value="${requestScope.crSubAsgnDTO.crSubasgnTitle}" readonly="readonly">
 	                                </div>
-	                                
+	                                <div class="form-group">
+	                                    <label>과제내용 :</label>
+	                                    <textarea rows="6" name="crSubasgnContent" class="form-control" placeholder="content" style="height: 400px;"
+	                                    readonly="readonly">${requestScope.crSubAsgnDTO.crSubasgnContent}</textarea>
+	                                </div>
+	                                <div class="form-group">
+	                                    
+	                                    <label>다운로드</label> : 
+                                    	<a href='${pageContext.request.contextPath}/cr/asgn/subAsgn/downLoad?fname=${requestScope.crSubAsgnDTO.crSubasgnFile}'>
+							    			${requestScope.crSubAsgnDTO.crSubasgnFile} 
+							      		</a>
+	                                </div>
+	                            </div>
+	                        
+	                            <div class="col-md-12">
+	               					<div class="form-group" style="text-align: right;">
+	                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/cr/subAsgn/updateform/${requestScope.crSubAsgnDTO.crAsgnCode}/astro">과제수정</a>
+	                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/cr/subAsgn/delete/${requestScope.crSubAsgnDTO.crAsgnCode}/astro">과제삭제</a><br><br>
+	                                </div>
 	                               	<!-- 멘토에서 보이는 피드백 작성란 -->
 	                                <article class="row">
 		                                <div style="margin-left: 10px;">
